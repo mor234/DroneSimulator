@@ -14,7 +14,6 @@ public class Lidar{
 	public double getDistance(int deltaTime) {
 		Point actualPointToShoot= drone.getPointOnMap();
 		double rotation = drone.getRotation()+degrees;
-		
 		double distanceInCM=1;
 		while(distanceInCM <= WorldParams.lidarLimit) { 
 			Point p = Tools.getPointByDistance(actualPointToShoot, rotation, distanceInCM);
@@ -23,8 +22,6 @@ public class Lidar{
 			}
 			distanceInCM++;
 		}
-		
-		
 		return distanceInCM;
 	}
 	
@@ -37,9 +34,6 @@ public class Lidar{
 			distanceInCM = getDistance(deltaTime);
 			distanceInCM += (int)ran.nextInt(WorldParams.lidarNoise*2) - WorldParams.lidarNoise; // +- 5 CM to the final calc
 		}
-		
-		
-		
 		this.current_distance = distanceInCM; // store it for instance get
 		return distanceInCM;
 	}
@@ -49,9 +43,6 @@ public class Lidar{
 		Point actualPointToShoot= drone.getPointOnMap();
 		double fromRotation = drone.getRotation()+degrees;
 		Point to = Tools.getPointByDistance(actualPointToShoot, fromRotation, this.current_distance);
-
-		
-	
 		g.drawLine((int)actualPointToShoot.x,(int)actualPointToShoot.y, (int)to.x, (int)to.y);
 	}
 	

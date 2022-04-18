@@ -10,8 +10,7 @@ import java.util.List;
 
 public class Drone {
 	private double gyroRotation;
-	private Point sensorOpticalFlow;
-	
+	private Point sensorOpticalFlow;       //speed sensor
 	private Point pointFromStart;
 	public Point startPoint;
 	public List<Lidar> lidars;
@@ -23,17 +22,13 @@ public class Drone {
 	
 	public Drone(Map realMap) {
 		this.realMap = realMap;
-		
 		this.startPoint = realMap.drone_start_point;
 		pointFromStart = new Point();
 		sensorOpticalFlow = new Point();
 		lidars = new ArrayList<>();
-
 		speed = 0.2;
-		
 		rotation = 0;
 		gyroRotation = rotation;
-		
 		cpu = new CPU(100,"Drone");
 	}
 	

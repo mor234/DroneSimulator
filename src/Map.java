@@ -42,7 +42,6 @@ public class Map{
 	}
 	
 	boolean isCollide(int x,int y) {
-		
 		return !map[x][y];
 	}
 	

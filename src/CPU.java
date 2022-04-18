@@ -12,11 +12,10 @@ public class CPU{
 	Thread thread;
 	
 	public CPU(int hz,String name) {
+		this.hz = hz;
 		functions_list = new ArrayList<>();
 		isPlay = false;
 		isPlayedBeforeStop = false;
-		
-		this.hz = hz;
 		elapsedMilli = 0;
 		thread = new Thread("Eventor_" + name){
 	        public void run(){
@@ -27,11 +26,9 @@ public class CPU{
 	        }
 	      };
         thread.start();
-
 		if(all_cpus == null) {
 			all_cpus = new ArrayList<>();
 		}
-		
 		all_cpus.add(this);
 	}
 	
@@ -50,7 +47,7 @@ public class CPU{
 	synchronized void resume() {
 		if(isPlayedBeforeStop) {
 			isPlay = true;
-			notify();
+			notify();            //wake up the thread
 		}
    }
 
@@ -70,7 +67,8 @@ public class CPU{
 		isPlayedBeforeStop = false;
 	}
 	
-	public long getElapsedMilli() {
+	public long getElapsedMilli()
+	{
 		return this.elapsedMilli;
 	}
 	
@@ -84,7 +82,6 @@ public class CPU{
 		int[] last_sample_times = null;
 		long last_sample;
 		int i=0;
-		
 		int time_to_sleep = 2;
 		if(1000/hz > 1) {
 			time_to_sleep = 1000/hz;
